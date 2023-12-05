@@ -22,9 +22,6 @@ export const TodoList = ( {title, tasks}: TodoListPropsType) => {
     //2.
     //const {title, tasks} = props
 
-    //3.
-
-
     const listItems: Array<JSX.Element> = []
     for (let i = 0; i < tasks.length; i++) {
         const listItem = <li>
