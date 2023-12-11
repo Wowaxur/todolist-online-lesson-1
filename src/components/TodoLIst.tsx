@@ -10,23 +10,18 @@ export type TaskType = {
 type TodoListPropsType = {
     title?: string
     tasks: Array<TaskType>
+    removeTask?: (taskID: number) => void
 
 }
 
-                            //3 props:
-export const TodoList = ( {title, tasks}: TodoListPropsType) => {
-    //1.
-    //const title = props.title
-    //const tasks = props.tasks
-
-    //2.
-    //const {title, tasks} = props
-
+//3 props:
+export const TodoList = ({title, tasks, removeTask}: TodoListPropsType) => {
     const listItems: Array<JSX.Element> = []
     for (let i = 0; i < tasks.length; i++) {
-        const listItem = <li>
+        const listItem = <li key={tasks[i].id}>
             <input type="checkbox" checked={tasks[i].isDone}/>
             <span>{tasks[i].title}
+                <button onClick={() => removeTask && removeTask(tasks[i].id)}>x</button>
             </span>
         </li>
         listItems.push(listItem)
