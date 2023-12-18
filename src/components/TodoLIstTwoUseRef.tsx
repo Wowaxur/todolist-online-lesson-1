@@ -1,4 +1,4 @@
-import React, {useState, KeyboardEvent} from "react";
+import React, {useRef} from "react";
 import {Button} from "./Button";
 import {FilterValuesType} from "../App";
 
@@ -19,14 +19,16 @@ type TodoListPropsType = {
 }
 
 //3 props:
-export const TodoList = ({
+export const TodoLIstTwoUseRef = ({
                              title,
                              tasks,
                              removeTask,
                              changeTodoListFilter,
                              addTask,
                          }: TodoListPropsType) => {
-    const [TaskTitle, setTaskTitle]= useState('')
+
+
+    const taskTitleInput = useRef<HTMLInputElement>(null)
 
 
     const listItems: Array<JSX.Element> = tasks.map((task: TaskType) => {
@@ -42,45 +44,34 @@ export const TodoList = ({
 
     })
     const tasksList: JSX.Element = tasks.length !== 0
-        ? <ul>
+        ? <>
             {listItems}
-        </ul>
+        </>
         : <span> TodoList is empty now</span>
 
-   // const onChangeSetTaskTitle =
 
-    const addTaskOnClickHandler = ()=>{
-        const trimmedTaskTitle = TaskTitle.trim()
-        if (trimmedTaskTitle){
-        addTask(TaskTitle)
-        }else {
-            alert('пробелы!')
+    const addTaskHandler = () => {
+        if(taskTitleInput.current){
+            const newTaskTitle = taskTitleInput.current.value
+            addTask(newTaskTitle)
+            taskTitleInput.current.value = ''
         }
-
-        setTaskTitle('')
-
     }
-    const addTaskKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) =>
-    {if(e.key ==='Enter' && TaskTitle) {
-        addTaskOnClickHandler()
-        }}
+
+
+
+
     return (
         <div className='todoList'>
             <h3 className='Title'>{title}</h3>
             <div>
-                <input value={TaskTitle}
-                    onChange={(e)=>{
-                    setTaskTitle(e.currentTarget.value)
-                    }}
-                       onKeyDown={addTaskKeyDownHandler}
-
+                <input ref={taskTitleInput}
                 />
-                <Button title={'+'}
-                        onClickHandler={addTaskOnClickHandler}
-                        isDisabled={!TaskTitle}
-                />
+                <Button onClickHandler={addTaskHandler} title={'+'}/>
             </div>
-            {tasksList}
+            <ul>
+                {tasksList}
+            </ul>
             <div>
                 <Button onClickHandler={() => changeTodoListFilter('all')} title='All'/>
                 <Button onClickHandler={() => changeTodoListFilter('active')} title='Active'/>
