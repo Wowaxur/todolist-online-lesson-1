@@ -3,19 +3,13 @@ import './App.css';
 import {TaskType, TodoList} from "./components/TodoLIst";
 import {v1} from "uuid";
 import {TodoLIstTwoUseRef} from "./components/TodoLIstTwoUseRef";
+import TodoJson from "./TodoJson/TodoJson";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
 
 function App() {
     const toDoListTitle = 'What to Learn'
-    /*   const [tasks, setTasks] =useState( [
-
-           {id:1,title:'HTML&CSS',isDone:true},
-           { id:2,title:'JS',isDone:true},
-           { id:3,title:'React',isDone:false},
-           { id:4,title:'React Native',isDone:false},
-   ])*/
     const [tasks, setTasks] = useState<Array<TaskType>>([
         {id: v1(), title: 'HTML&CSS', isDone: true},
         {id: v1(), title: 'JS', isDone: true},
@@ -23,11 +17,7 @@ function App() {
         {id: v1(), title: 'React Native', isDone: false},
     ])
 
-    /* const tasks2:TaskType[] = [
-         {id:4,title:'Disturbed',isDone:true},
-         { id:5,title:'Hollywood Undead',isDone:true},
-         { id:6,title:'Red',isDone:true},
-     ]*/
+
     function removeTask(id: string) {
         let filteredTasks = tasks.filter(task => task.id !== id)
         setTasks(filteredTasks)
@@ -57,21 +47,22 @@ function App() {
 
     return (
         <div className="App">
-          {/*  <TodoLIstTwoUseRef
-                tasks={filteredTasks}
-                title={toDoListTitle}
-                removeTask={removeTask}
-                changeTodoListFilter={changeTodoListFilter}
-                addTask={addTask}
-            />*/}
-            <TodoList
+            <TodoLIstTwoUseRef
                 tasks={filteredTasks}
                 title={toDoListTitle}
                 removeTask={removeTask}
                 changeTodoListFilter={changeTodoListFilter}
                 addTask={addTask}
             />
-
+           {/* <TodoList
+                tasks={filteredTasks}
+                title={toDoListTitle}
+                removeTask={removeTask}
+                changeTodoListFilter={changeTodoListFilter}
+                addTask={addTask}
+            />
+            <TodoJson
+            />*/}
 
         </div>
     )

@@ -14,7 +14,24 @@
   border-radius: 5px;
   background-color: #e8c88e;
   padding: 15px;
+  height: max-content;
+
 }
 .Title {
   text-align: center;
+}
+.TodoJsonWrapper {
+  background-color: #eedcdc;
+  border: 1px solid green;
+  max-height: 500px;
+  overflow: auto;
+  text-align: left;
+
+}
+.ToggleButton{
+  padding: 10px;
+  text-align: center;
+}
+.todoLister{
+
 }

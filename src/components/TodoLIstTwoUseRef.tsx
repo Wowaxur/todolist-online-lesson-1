@@ -50,7 +50,7 @@ export const TodoLIstTwoUseRef = ({
         : <span> TodoList is empty now</span>
 
 
-    const addTaskHandler = () => {
+    const addTaskOnClickHandler = () => {
         if(taskTitleInput.current){
             const newTaskTitle = taskTitleInput.current.value
             addTask(newTaskTitle)
@@ -64,10 +64,10 @@ export const TodoLIstTwoUseRef = ({
     return (
         <div className='todoList'>
             <h3 className='Title'>{title}</h3>
-            <div>
+            <div className={"todoLister"}>
                 <input ref={taskTitleInput}
                 />
-                <Button onClickHandler={addTaskHandler} title={'+'}/>
+                <Button onClickHandler={addTaskOnClickHandler} title={'+'}/>
             </div>
             <ul>
                 {tasksList}
