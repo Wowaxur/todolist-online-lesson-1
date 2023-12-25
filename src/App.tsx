@@ -3,11 +3,14 @@ import './App.css';
 import {TaskType, TodoList} from "./components/TodoLIst";
 import {v1} from "uuid";
 import {TodoLIstTwoUseRef} from "./components/TodoLIstTwoUseRef";
-import TodoJson from "./TodoJson/TodoJson";
+
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
-
+// C - +
+// R - + (filter, sort, search, pagination, view-mode)
+// U -
+// D - +
 function App() {
     const toDoListTitle = 'What to Learn'
     const [tasks, setTasks] = useState<Array<TaskType>>([
@@ -17,6 +20,7 @@ function App() {
         {id: v1(), title: 'React Native', isDone: false},
     ])
 
+    const [FilterTasks, setFilterTasks] = useState<FilterValuesType>('all')
 
     function removeTask(id: string) {
         let filteredTasks = tasks.filter(task => task.id !== id)
@@ -30,8 +34,6 @@ function App() {
 
     }
 
-    const [FilterTasks, setFilterTasks] = useState<FilterValuesType>('all')
-
     const getFilteredTasks = (tasks: Array<TaskType>, FilterTasks: FilterValuesType): Array<TaskType> => {
         return FilterTasks === 'active'
             ? tasks.filter(t => !t.isDone)
@@ -39,30 +41,38 @@ function App() {
                 ? tasks.filter(t => t.isDone)
                 : tasks
     }
+
     const filteredTasks = getFilteredTasks(tasks, FilterTasks)
 
     const changeTodoListFilter = (filterValue: FilterValuesType) => {
         setFilterTasks(filterValue)
     }
 
+    const changeTasksStatus = (taskId: string, newIsDoneValue: boolean) => {
+        const nextState: Array<TaskType> = tasks.map(t => t.id === taskId ? {...t, isDone: newIsDoneValue} : t)
+        setTasks(nextState)
+    }
+
     return (
         <div className="App">
-            <TodoLIstTwoUseRef
+            {/*<TodoLIstTwoUseRef*/}
+            {/*    tasks={filteredTasks}*/}
+            {/*    title={toDoListTitle}*/}
+            {/*    removeTask={removeTask}*/}
+            {/*    changeTodoListFilter={changeTodoListFilter}*/}
+            {/*    addTask={addTask}*/}
+            {/*/>*/}
+            <TodoList
+                FilterTasks={FilterTasks}
                 tasks={filteredTasks}
                 title={toDoListTitle}
-                removeTask={removeTask}
-                changeTodoListFilter={changeTodoListFilter}
                 addTask={addTask}
-            />
-           {/* <TodoList
-                tasks={filteredTasks}
-                title={toDoListTitle}
                 removeTask={removeTask}
+                changeTasksStatus={changeTasksStatus}
                 changeTodoListFilter={changeTodoListFilter}
-                addTask={addTask}
             />
-            <TodoJson
-            />*/}
+            {/* <TodoJson/>*/}
+
 
         </div>
     )

@@ -30,7 +30,6 @@ export const TodoLIstTwoUseRef = ({
 
     const taskTitleInput = useRef<HTMLInputElement>(null)
 
-
     const listItems: Array<JSX.Element> = tasks.map((task: TaskType) => {
         return (
             <li key={task.id}>

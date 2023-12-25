@@ -32,6 +32,28 @@
   padding: 10px;
   text-align: center;
 }
-.todoLister{
+.task {
+  font-weight: bold;
+}
+.task-done {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+.btn-active {
+  background-color: yellowgreen;
+  border-color: yellowgreen;
+  color: #131212;
+  border-radius: 5px;
+}
+.btn{
+  border-radius: 5px;
+}
+.input-error {
+  border: red 2px solid;
+  outline: none;
+}
 
+.error-message {
+  color: red;
+  font-weight: bold;
 }
